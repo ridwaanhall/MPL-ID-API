@@ -1,0 +1,5 @@
+{
+  "b_msg": "Please type user ID and zone ID",
+  "c_example": "/<userID>/<zoneID>",
+  "a_url": "https://mlbb-api.ridwaanhall.repl.co/check-username"
+}
