@@ -59,3 +59,9 @@ class MLBBController:
     seratusPersen = tLose * wrResult
     final = seratusPersen - tMatch
     return round(final)
+
+  @staticmethod
+  def calculate_winrate_help():
+    with open('json/winrate_target.json', 'r') as json_file:
+      data = json.load(json_file)
+    return data
