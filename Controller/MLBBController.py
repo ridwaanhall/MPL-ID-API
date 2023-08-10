@@ -41,7 +41,7 @@ class MLBBController:
   @staticmethod
   def calculate_winrate_response(tMatch, tWr, wrReq):
     result_num = MLBBController.calculate_winrate(tMatch, tWr, wrReq)
-    response_text = f"Kamu memerlukan sekitar {result_num} win tanpa lose (WS/win streak) untuk mendapatkan win rate {wrReq}%"
+    response_text = f"You need about {result_num} win(s) without losing (WS/win streak) to get a win rate of {wrReq}%"
     response = {
       "2_total_match": tMatch,
       "3_total_wr": tWr,
