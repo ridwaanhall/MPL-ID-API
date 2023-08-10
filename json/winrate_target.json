@@ -1,0 +1,5 @@
+{
+  "b_msg": "Please type total match, total winrate, and winrate target",
+  "c_example": "/<total match>/<total winrate>/<winrate target>",
+  "a_url": "https://mlbb-api.ridwaanhall.repl.co/winrate-count"
+}
