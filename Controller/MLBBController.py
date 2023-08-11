@@ -1,5 +1,17 @@
 import requests
 from bs4 import BeautifulSoup
+from flask import Response
+
+
+class JSONtoXML:
+
+  @staticmethod
+  def convert_json_to_xml(json_data):
+    from dicttoxml import dicttoxml
+    xml_data = dicttoxml(json_data,
+                         attr_type=False)  # attr_type is to hide type or not
+    response = Response(xml_data, content_type='application/xml')
+    return response
 
 
 class MLBB_in_game:
