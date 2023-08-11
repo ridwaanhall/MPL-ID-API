@@ -30,8 +30,9 @@ class MLBB_in_game:
     if result.get('ok'):
       formatted_response = {
         "msg": "data player ditemukan",
-        "name": result.get('name'),
+        "username": result.get('name'),
         "ok": True,
+        "game":"Mobile Legends Bang Bang (MLBB)",
         "user_id": user_id,
         "zone_id": zone_id
       }
