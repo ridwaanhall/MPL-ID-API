@@ -48,6 +48,11 @@ def calculate_wr_winlose(total_matches_played, win_rate):
   return MLBB_in_game.wr_winlose(total_matches_played, win_rate)
 
 
+@app.route('/mpl-id', methods=['GET'])
+def get_mpl_id():
+  return redirect(url_for('get_mpl_id_transfer'))
+
+
 @app.route('/mpl-id/transfer', methods=['GET'])
 def get_mpl_id_transfer():
   return MPL_ID.transfer()
