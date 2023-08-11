@@ -285,3 +285,314 @@ class MPL_ID:
       return team_info
     else:
       return "Failed to retrieve the webpage."
+
+  @staticmethod
+  def statistics_teams():
+
+    url = "https://id-mpl.com/statistics"
+    response = requests.get(url)
+
+    if response.status_code == 200:
+      soup = BeautifulSoup(response.content, "html.parser")
+      data_table = soup.find("table", id="table-team-statistics")
+
+      if data_table:
+        team_stats = []
+        rows = data_table.find_all("tr")
+        for row in rows[1:]:
+          cells = row.find_all("td")
+          if len(cells) == 9:
+            team_info = cells[0]
+
+            team_logo = team_info.find(
+              "div", class_="team-logo me-2").find("img")["src"]
+            short_name = team_info.find(
+              "span", class_="d-lg-none").get_text(strip=True)
+            long_name = team_info.find(
+              "span", class_="d-none d-lg-block").get_text(strip=True)
+
+            kills = cells[1].get_text(strip=True)
+            deaths = cells[2].get_text(strip=True)
+            assists = cells[3].get_text(strip=True)
+            gold = cells[4].get_text(strip=True)
+            damage = cells[5].get_text(strip=True)
+            lord = cells[6].get_text(strip=True)
+            tortoise = cells[7].get_text(strip=True)
+            tower = cells[8].get_text(strip=True)
+
+            team_stat = {
+              "Team Logo": team_logo,
+              "Short Name": short_name,
+              "Long Name": long_name,
+              "Kills": kills,
+              "Deaths": deaths,
+              "Assists": assists,
+              "Gold": gold,
+              "Damage": damage,
+              "Lord": lord,
+              "Tortoise": tortoise,
+              "Tower": tower
+            }
+            team_stats.append(team_stat)
+
+        return team_stats
+      else:
+        return "Data table not found on the page."
+    else:
+      return "Failed to retrieve the webpage."
+
+  @staticmethod
+  def statistics_players():
+
+    url = "https://id-mpl.com/statistics"
+    response = requests.get(url)
+
+    if response.status_code == 200:
+      soup = BeautifulSoup(response.content, "html.parser")
+      player_table = soup.find("table", class_="table-players-statistics")
+
+      if player_table:
+        player_stats = []
+        rows = player_table.find_all("tr")
+        for row in rows[1:]:
+          cells = row.find_all("td")
+          if len(cells) == 11:
+            player_name_div = cells[0].find("div", class_="player-name")
+            player_name = player_name_div.find("b").get_text(strip=True)
+            team_logo_img = cells[0].find("img")["src"]
+
+            lanes = cells[1].get_text(strip=True)
+            total_games = cells[2].get_text(strip=True)
+            total_kills = cells[3].get_text(strip=True)
+            avg_kills = cells[4].get_text(strip=True)
+            total_deaths = cells[5].get_text(strip=True)
+            avg_deaths = cells[6].get_text(strip=True)
+            total_assists = cells[7].get_text(strip=True)
+            avg_assists = cells[8].get_text(strip=True)
+            avg_kda = cells[9].get_text(strip=True)
+            kill_participation = cells[10].get_text(strip=True)
+
+            player_stat = {
+              "Player Name": player_name,
+              "Team Logo Image": team_logo_img,
+              "Lanes": lanes,
+              "Total Games": total_games,
+              "Total Kills": total_kills,
+              "Avg Kills": avg_kills,
+              "Total Deaths": total_deaths,
+              "Avg Deaths": avg_deaths,
+              "Total Assists": total_assists,
+              "Avg Assists": avg_assists,
+              "Avg KDA": avg_kda,
+              "Kill Participation": kill_participation
+            }
+            player_stats.append(player_stat)
+
+        return player_stats
+      else:
+        return "Player table not found on the page."
+    else:
+      return "Failed to retrieve the webpage."
+
+  @staticmethod
+  def statistics_heroes():
+
+    url = "https://id-mpl.com/statistics"
+    response = requests.get(url)
+
+    if response.status_code == 200:
+      soup = BeautifulSoup(response.content, "html.parser")
+      heroes_table = soup.find("table", class_="table-heroes-statistics")
+
+      if heroes_table:
+        heroes_stats = []
+        rows = heroes_table.find_all("tr", class_="row-heroes")
+        for row in rows:
+          cells = row.find_all("td")
+          if len(cells) == 5:
+            hero_name_div = cells[0].find("div", class_="hero-name")
+            hero_name = hero_name_div.find("b").get_text(strip=True)
+            hero_image = cells[0].find("img")["src"]
+
+            pick = cells[1].get_text(strip=True)
+            ban = cells[2].get_text(strip=True)
+            win = cells[3].get_text(strip=True)
+            win_rate = cells[4].get_text(strip=True)
+
+            hero_stat = {
+              "Hero Name": hero_name,
+              "Hero Image": hero_image,
+              "Pick": pick,
+              "Ban": ban,
+              "Win": win,
+              "Win Rate": win_rate
+            }
+            heroes_stats.append(hero_stat)
+
+        return heroes_stats
+      else:
+        return "Heroes table not found on the page."
+    else:
+      return "Failed to retrieve the webpage."
+
+  @staticmethod
+  def statistics_hero_pools():
+
+    url = "https://id-mpl.com/statistics"
+    response = requests.get(url)
+
+    if response.status_code == 200:
+      soup = BeautifulSoup(response.content, "html.parser")
+      hero_pools_table = soup.find("table", class_="table-hero-pools")
+
+      if hero_pools_table:
+        hero_pools_stats = []
+        rows = hero_pools_table.find_all("tr", class_="col-hero-pools")
+        for row in rows:
+          cells = row.find_all("td")
+          if len(cells) == 4:
+            player_info_div = cells[0].find(
+              "div",
+              class_="d-flex flex-row justify-content-start align-items-center"
+            )
+            player_name = player_info_div.find("b").get_text(strip=True)
+            player_image = player_info_div.find("img")["src"]
+
+            lanes = cells[1].get_text(strip=True)
+            total = cells[2].get_text(strip=True)
+
+            hero_pool_data = []
+            hero_pool_div = cells[3].find("div", class_="hero-pool-outer")
+            hero_pool_items = hero_pool_div.find_all(
+              "div", class_="position-relative")
+            for hero_pool_item in hero_pool_items:
+              hero_image = hero_pool_item.find("img")["src"]
+              hero_pick = hero_pool_item.find(
+                "div", class_="hero-pool-pick").get_text(strip=True)
+              hero_pool_count = hero_pool_item.find(
+                "div", class_="hero-pool-count").get_text(strip=True)
+
+              hero_pool_info = {
+                "Hero Image": hero_image,
+                "Hero Pick": hero_pick,
+                "Hero Pool Count": hero_pool_count
+              }
+              hero_pool_data.append(hero_pool_info)
+
+            player_hero_pool = {
+              "Player Name": player_name,
+              "Player Image": player_image,
+              "Lanes": lanes,
+              "Total": total,
+              "Hero Pool": hero_pool_data
+            }
+            hero_pools_stats.append(player_hero_pool)
+
+        return hero_pools_stats
+      else:
+        return "Hero Pools table not found on the page."
+    else:
+      return "Failed to retrieve the webpage."
+
+  @staticmethod
+  def statistics_player_pools():
+
+    url = "https://id-mpl.com/statistics"
+    response = requests.get(url)
+
+    if response.status_code == 200:
+      soup = BeautifulSoup(response.content, "html.parser")
+      player_pools_table = soup.find("table", class_="table-player-pools")
+
+      if player_pools_table:
+        player_pools_stats = []
+        rows = player_pools_table.find_all("tr", class_="col-player-pools")
+        for row in rows:
+          cells = row.find_all("td")
+          if len(cells) == 3:
+            hero_info_div = cells[0].find(
+              "div",
+              class_="d-flex flex-row justify-content-start align-items-center"
+            )
+            hero_name = hero_info_div.find("b").get_text(strip=True)
+            hero_image = hero_info_div.find("img")["src"]
+
+            total = cells[1].get_text(strip=True)
+
+            player_pool_data = []
+            player_pool_div = cells[2].find("div", class_="player-pool-outer")
+            player_pool_items = player_pool_div.find_all(
+              "div", class_="player-pool-card")
+            for player_pool_item in player_pool_items:
+              player_image = player_pool_item.find(
+                "img", class_="player-pool-image")["src"]
+              player_name = player_pool_item.find(
+                "div", class_="player-pool-info").get_text(strip=True)
+              player_pick = player_pool_item.find(
+                "div", class_="player-pool-pick").get_text(strip=True)
+              player_pool_count = player_pool_item.find(
+                "div", class_="player-pool-count").get_text(strip=True)
+
+              player_pool_info = {
+                "Player Name": player_name,
+                "Player Image": player_image,
+                "Player Pick": player_pick,
+                "Player Pool Count": player_pool_count
+              }
+              player_pool_data.append(player_pool_info)
+
+            hero_player_pool = {
+              "Hero Name": hero_name,
+              "Hero Image": hero_image,
+              "Total": total,
+              "Player Pool": player_pool_data
+            }
+            player_pools_stats.append(hero_player_pool)
+
+        return player_pools_stats
+      else:
+        return "Player Pools table not found on the page."
+    else:
+      return "Failed to retrieve the webpage."
+
+  @staticmethod
+  def statistics_player_mvp():
+
+    url = "https://id-mpl.com/statistics"
+    response = requests.get(url)
+
+    if response.status_code == 200:
+      soup = BeautifulSoup(response.content, "html.parser")
+      mvp_table = soup.find("table", class_="table-mvp")
+
+      if mvp_table:
+        mvp_stats = []
+        rows = mvp_table.find_all("tr")
+        for row in rows[1:]:
+          cells = row.find_all("td")
+          if len(cells) == 3:
+            rank = cells[0].find("div",
+                                 class_="team-rank").get_text(strip=True)
+            player_info_div = cells[1].find(
+              "div",
+              class_="d-flex flex-row justify-content-start align-items-center"
+            )
+            player_name = player_info_div.find("b").get_text(strip=True)
+            player_image = player_info_div.find("img")["src"]
+
+            mvp_points = cells[2].find("div",
+                                       class_="mvp-point").get_text(strip=True)
+
+            player_mvp_info = {
+              "Rank": rank,
+              "Player Name": player_name,
+              "Player Image": player_image,
+              "MVP Points": mvp_points
+            }
+            mvp_stats.append(player_mvp_info)
+
+        return mvp_stats
+      else:
+        return "MVP Player table not found on the page."
+    else:
+      return "Failed to retrieve the webpage."
