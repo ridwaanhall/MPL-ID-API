@@ -34,8 +34,15 @@ def calculate_winrate_help():
   return HelpController.calculate_winrate_help()
 
 
-# to target winrate
+# to know win without lose by target winrate
 @app.route('/winrate-target/<int:tMatch>/<float:tWr>/<float:wrReq>',
            methods=['GET'])
 def calculate_winrate_route(tMatch, tWr, wrReq):
   return MLBBController.calculate_winrate_response(tMatch, tWr, wrReq)
+
+
+# to know win and lose by total match and winrate
+@app.route('/wr-winlose/<int:total_matches_played>/<float:win_rate>',
+           methods=['GET'])
+def calculate_wr_winlose(total_matches_played, win_rate):
+  return MLBBController.wr_winlose(total_matches_played, win_rate)

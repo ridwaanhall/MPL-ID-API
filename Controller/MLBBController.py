@@ -53,3 +53,16 @@ class MLBBController:
     seratusPersen = tLose * wrResult
     final = seratusPersen - tMatch
     return round(final)
+
+  @staticmethod
+  def wr_winlose(total_matches_played, win_rate):
+    matches_won = (win_rate / 100) * total_matches_played
+    matches_lost = total_matches_played - matches_won
+    response = {
+      "total_match": total_matches_played,
+      "winrate": win_rate,
+      "matches_won": matches_won,
+      "matches_lost": matches_lost,
+      "message": f"with a total of {total_matches_played} matche(s) and a win rate of {win_rate}%, you have a total of {matches_won} win(s) and {matches_lost} lose(s)"
+    }
+    return response
