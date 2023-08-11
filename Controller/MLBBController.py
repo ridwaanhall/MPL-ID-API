@@ -35,7 +35,7 @@ class MLBB_in_game:
 
   @staticmethod
   def calculate_winrate_response(tMatch, tWr, wrReq):
-    result_num = MLBBController.calculate_winrate(tMatch, tWr, wrReq)
+    result_num = MLBB_in_game.calculate_winrate(tMatch, tWr, wrReq)
     response_text = f"You need about {result_num} win(s) without losing (WS/win streak) to get a win rate of {wrReq}%"
     response = {
       "2_total_match": tMatch,
@@ -118,8 +118,6 @@ class MPL_ID:
 
   @staticmethod
   def standings():
-    import requests
-    from bs4 import BeautifulSoup
 
     url = "https://id-mpl.com/"
     response = requests.get(url)
