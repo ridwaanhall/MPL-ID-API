@@ -1,3 +1,205 @@
 {
-  "message": "Hello, this program is being worked"
+  "base_url": "https://mlbb-api.ridwaanhall.repl.co",
+  "source": "mainlagiaja.com, id-mpl.com",
+  "total_routes": "35 more routes",
+  "routes_available": "/,help, check-username, check-username/<int:user_id>/<int:zone_id>, winrate-target, winrate-target/<int:tMatch>/<float:tWr>/<float:wrReq>, wr-winlose/<int:total_matches_played>/<float:win_rate>, mpl-id, mpl-id/transfer, mpl-id/transfer.xml, mpl-id/transfer.json, mpl-id/standings, mpl-id/standings.xml, mpl-id/standings.json, mpl-id/teams, mpl-id/teams.json, mpl-id/teams.xml, mpl-id/teams/<string:team_name>, mpl-id/statistics-teams, mpl-id/statistics-teams.xml, mpl-id/statistics-teams.json, mpl-id/statistics-players, mpl-id/statistics-players.xml, mpl-id/statistics-players.json, mpl-id/statistics-heroes, mpl-id/statistics-heroes.xml, mpl-id/statistics-heroes.json, mpl-id/statistics-hero-pools, mpl-id/statistics-hero-pools.xml, mpl-id/statistics-hero-pools.json, mpl-id/statistics-player-pools, mpl-id/statistics-player-pools.xml, mpl-id/statistics-player-pools.json, mpl-id/statistics-player-mvp, mpl-id/statistics-player-mvp.xml, mpl-id/statistics-player-mvp.json",
+  "routes":
+  {
+    "routes_list": [
+      {
+        "route": "/",
+        "method": "GET",
+        "format": "json",
+        "function": "home()",
+        "note": "Root route that redirects to the global_help route."
+      },
+      {
+        "route": "/help",
+        "method": "GET",
+        "format": "json",
+        "function": "global_help()",
+        "note": "Displays help information."
+      },
+      {
+        "route": "/check-username",
+        "method": "GET",
+        "format": "json",
+        "function": "check_username_help()",
+        "note": "Displays help information for checking usernames."
+      },
+      {
+        "route": "/check-username/<user_id>/<zone_id>",
+        "method": "GET",
+        "format": "json",
+        "function": "check_username(user_id, zone_id)",
+        "note": "Check a username by providing user_id and zone_id.",
+        "example": "https://mlbb-api.example.com/check-username/688700997/8742"
+      },
+      {
+        "route": "/winrate-target",
+        "method": "GET",
+        "format": "json",
+        "function": "calculate_winrate_help()",
+        "note": "Displays help information for calculating win rates."
+      },
+      {
+        "route": "/winrate-target/<tMatch>/<tWr>/<wrReq>",
+        "method": "GET",
+        "format": "json",
+        "function": "calculate_winrate_route(tMatch, tWr, wrReq)",
+        "note": "Calculates win rate information based on provided parameters.",
+        "example": "https://mlbb-api.example.com/winrate-target/100/50.0/60.0"
+      },
+      {
+        "route": "/wr-winlose/<total_matches_played>/<win_rate>",
+        "method": "GET",
+        "format": "json",
+        "function": "calculate_wr_winlose(total_matches_played, win_rate)",
+        "note": "Calculates win and lose based on total matches played and win rate."
+      },
+      {
+        "route": "/mpl-id",
+        "method": "GET",
+        "format": "json",
+        "function": "get_mpl_id()",
+        "note": "Home mpl id redirect to standings."
+      },
+      {
+        "route": "/mpl-id/transfer",
+        "method": "GET",
+        "format": "json",
+        "function": "get_mpl_id_transfer_json()",
+        "note": "Displays transfer player information in mpl id."
+      },
+      {
+        "route": "/mpl-id/standings",
+        "method": "GET",
+        "format": "json",
+        "function": "get_mpl_id_standings_json()",
+        "note": "Displays standings information in mpl id."
+      },
+      {
+        "route": "/mpl-id/teams",
+        "method": "GET",
+        "format": "json",
+        "function": "get_mpl_id_teams_json()",
+        "note": "Displays information about any teams playing in mpl id."
+      },
+      {
+        "route": "/mpl-id/teams/<team_name>",
+        "method": "GET",
+        "format": "json",
+        "function": "get_mpl_id_team_players(team_name)",
+        "note": "Displays player names in mpl id by team name."
+      },
+      {
+        "route": "/mpl-id/statistics-teams",
+        "method": "GET",
+        "format": "json",
+        "function": "get_teams_statistics_json()",
+        "note": "Displays statistics of teams in mpl id."
+      },
+      {
+        "route": "/mpl-id/statistics-players",
+        "method": "GET",
+        "format": "json",
+        "function": "get_players_statistics_json()",
+        "note": "Displays statistics of players in mpl id."
+      },
+      {
+        "route": "/mpl-id/statistics-heroes",
+        "method": "GET",
+        "format": "json",
+        "function": "get_heroes_statistics_json()",
+        "note": "Displays statistics of heroes' winrate pick in mpl id."
+      },
+      {
+        "route": "/mpl-id/statistics-hero-pools",
+        "method": "GET",
+        "format": "json",
+        "function": "get_hero_pools_statistics_json()",
+        "note": "Displays statistics of heroes used by player pools in mpl id."
+      },
+      {
+        "route": "/mpl-id/statistics-player-pools",
+        "method": "GET",
+        "format": "json",
+        "function": "get_player_pools_statistics_json()",
+        "note": "Displays statistics of players using hero pools in mpl id."
+      },
+      {
+        "route": "/mpl-id/statistics-player-mvp",
+        "method": "GET",
+        "format": "json",
+        "function": "get_player_mvp_statistics_json()",
+        "note": "Displays statistics of MVP players in mpl id."
+      }
+    ],
+    "xml_routes": [
+      {
+        "route": "/mpl-id/transfer.xml",
+        "method": "GET",
+        "format": "xml",
+        "function": "get_mpl_id_transfer_xml()",
+        "note": "Displays transfer player information in mpl id."
+      },
+      {
+        "route": "/mpl-id/standings.xml",
+        "method": "GET",
+        "format": "xml",
+        "function": "get_mpl_id_standings_xml()",
+        "note": "Displays standings information in mpl id."
+      },
+      {
+        "route": "/mpl-id/teams.xml",
+        "method": "GET",
+        "format": "xml",
+        "function": "get_mpl_id_teams_xml()",
+        "note": "Displays information about any teams playing in mpl id."
+      },
+      {
+        "route": "/mpl-id/statistics-teams.xml",
+        "method": "GET",
+        "format": "xml",
+        "function": "get_teams_statistics_xml()",
+        "note": "Displays statistics of teams in mpl id."
+      },
+      {
+        "route": "/mpl-id/statistics-players.xml",
+        "method": "GET",
+        "format": "xml",
+        "function": "get_players_statistics_xml()",
+        "note": "Displays statistics of players in mpl id."
+      },
+      {
+        "route": "/mpl-id/statistics-heroes.xml",
+        "method": "GET",
+        "format": "xml",
+        "function": "get_heroes_statistics_xml()",
+        "note": "Displays statistics of heroes' winrate pick in mpl id."
+      },
+      {
+        "route": "/mpl-id/statistics-hero-pools.xml",
+        "method": "GET",
+        "format": "xml",
+        "function": "get_hero_pools_statistics_xml()",
+        "note": "Displays statistics of heroes used by player pools in mpl id."
+      },
+      {
+        "route": "/mpl-id/statistics-player-pools.xml",
+        "method": "GET",
+        "format": "xml",
+        "function": "get_player_pools_statistics_xml()",
+        "note": "Displays statistics of players using hero pools in mpl id."
+      },
+      {
+        "route": "/mpl-id/statistics-player-mvp.xml",
+        "method": "GET",
+        "format": "xml",
+        "function": "get_player_mvp_statistics_xml()",
+        "note": "Displays statistics of MVP players in mpl id."
+      }
+    ]
+  }
+
 }

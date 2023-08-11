@@ -6,14 +6,21 @@ app = Flask(__name__)
 
 
 @app.route("/")
-def hello_world():
-  return redirect(url_for('global_help'))
+def home():
+  return redirect(url_for('global_help_xml'))
 
 
 # dashboard to Help
-@app.route('/help', methods=['GET'])
-def global_help():
+@app.route('/help.json', methods=['GET'])
+def global_help_json():
   return HelpController.global_help()
+
+
+# dashboard to Help
+@app.route('/help.xml', methods=['GET'])
+def global_help_xml():
+  help = HelpController.global_help()
+  return JSONtoXML.convert_json_to_xml(help)
 
 
 # dashboard to check username help
@@ -105,6 +112,12 @@ def get_mpl_id_teams_xml():
 @app.route('/mpl-id/teams/<string:team_name>', methods=['GET'])
 def get_mpl_id_team_players(team_name):
   return MPL_ID.team_players(team_name)
+
+
+@app.route('/mpl-id/teams/<string:team_name>.xml', methods=['GET'])
+def get_mpl_id_team_players_xml(team_name):
+  team_players = MPL_ID.team_players(team_name)
+  return JSONtoXML.convert_json_to_xml(team_players)
 
 
 # to know statistics of teams in mpl id
