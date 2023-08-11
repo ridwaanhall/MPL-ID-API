@@ -66,3 +66,33 @@ def get_mpl_id_teams():
 @app.route('/mpl-id/teams/<string:team_name>', methods=['GET'])
 def get_mpl_id_team_players(team_name):
   return MPL_ID.team_players(team_name)
+
+
+@app.route('/mpl-id/statistics-teams', methods=['GET'])
+def get_mpl_id_statistics():
+  return MPL_ID.statistics_teams()
+
+
+@app.route('/mpl-id/statistics-players', methods=['GET'])
+def get_players_statistics():
+  return MPL_ID.statistics_players()
+
+
+@app.route('/mpl-id/statistics-heroes', methods=['GET'])
+def get_heroes_staatistics():
+  return MPL_ID.statistics_heroes()
+
+
+@app.route('/mpl-id/statistics-hero-pools', methods=['GET'])
+def get_hero_pools_statistics():
+  return MPL_ID.statistics_hero_pools()
+
+
+@app.route('/mpl-id/statistics-player-pools', methods=['GET'])
+def get_player_pools_statistics():
+  return MPL_ID.statistics_player_pools()
+
+
+@app.route('/mpl-id/statistics-player-mvp', methods=['GET'])
+def get_player_mvp_statistics():
+  return MPL_ID.statistics_player_mvp()
