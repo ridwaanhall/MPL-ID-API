@@ -50,7 +50,7 @@ def calculate_wr_winlose(total_matches_played, win_rate):
 
 @app.route('/mpl-id', methods=['GET'])
 def get_mpl_id():
-  return redirect(url_for('get_mpl_id_transfer'))
+  return redirect(url_for('get_mpl_id_standings'))
 
 
 @app.route('/mpl-id/transfer', methods=['GET'])
