@@ -1,4 +1,4 @@
-from flask import Flask, redirect, url_for
+from flask import Flask, redirect, url_for, jsonify
 from Controller.MLBBController import MLBB_in_game, MPL_ID, JSONtoXML
 from Controller.HelpController import HelpController
 
@@ -11,6 +11,7 @@ def home():
 
 
 # dashboard to Help
+@app.route('/help', methods=['GET'])
 @app.route('/help.json', methods=['GET'])
 def global_help_json():
   return HelpController.global_help()
@@ -27,7 +28,6 @@ def global_help_xml():
 @app.route('/check-username', methods=['GET'])
 def check_username_help():
   return HelpController.check_username_help()
-
 
 
 # to get username by userid and zoneid
@@ -62,7 +62,7 @@ def calculate_wr_winlose(total_matches_played, win_rate):
 # home mpl id redirect to standings
 @app.route('/mpl-id', methods=['GET'])
 def get_mpl_id():
-  return redirect(url_for('get_mpl_id_standings'))
+  return redirect(url_for('get_mpl_id_standings_xml'))
 
 
 # to know transfer player in mpl id
@@ -220,3 +220,11 @@ def get_player_mvp_statistics_json():
 def get_player_mvp_statistics_xml():
   player_mvp_stats_data = MPL_ID.statistics_player_mvp()
   return JSONtoXML.convert_json_to_xml(player_mvp_stats_data)
+
+
+# Catch-all route for invalid URLs
+@app.route('/<path:invalid_url>', methods=['GET'])
+def handle_invalid_url(invalid_url):
+  message = f"No routes for {invalid_url}, please use another URL."
+  response_data = {"message": message}
+  return jsonify(response_data), 404  # Return a 404 Not Found status
